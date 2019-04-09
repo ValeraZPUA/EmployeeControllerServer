@@ -1,15 +1,34 @@
 const User = require('../models/user.model');
 const bcrypt = require('bcrypt');
 
+// module.exports.login = async (req, res, next) => {
+//     const {email, password} = req.body;
+//     try {
+//         const user = await User.findOne({email: email});
+//         console.log(user)
+//         if (!user) {
+//             throw new Error("Email or password is not valid");
+//         }
+//         const isPasswordValid = await bcrypt.compare(password, user.password);
+//         if (!isPasswordValid) {
+//             throw new Error("Email or password is not valid");
+//         }
+//         res.send({ user });
+//     } catch (e) {
+//         next(e);
+//     }
+// };
+
 module.exports.login = async (req, res, next) => {
-    const {email, password} = req.body;
+    const data = req.body;
+    console.log(data);
     try {
-        const user = await User.findOne({email: email});
+        const user = await User.findOne({email: data.email});
         console.log(user)
         if (!user) {
             throw new Error("Email or password is not valid");
         }
-        const isPasswordValid = await bcrypt.compare(password, user.password);
+        const isPasswordValid = await bcrypt.compare(data.password, user.password);
         if (!isPasswordValid) {
             throw new Error("Email or password is not valid");
         }
@@ -30,11 +49,11 @@ module.exports.createUser = async (req, res, next) => {
     }
 };
 
-// module.exports.getAllUsers = async (req, res, next) => {
-//     try {
-//         const user = await User.find();
-//         res.send(user);
-//     } catch (e) {
-//         next (e);
-//     }
-// };
+module.exports.getAllUsers = async (req, res, next) => {
+    try {
+        const user = await User.find();
+        res.send(user);
+    } catch (e) {
+        next (e);
+    }
+};

@@ -1,33 +1,52 @@
 const mongoose = require('mongoose');
 
-const Schema = new mongoose.Schema({
+const { ObjectId } = mongoose.Schema.Types;
+
+const employeeSchema = new mongoose.Schema({
     fullName: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     gender: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     phoneNumber: {
         type: Number,
-        required: true
+        required: true,
+        trim: true
     },
     addDate: {
         type: Date,
         required: true,
-        default: Date.now
+        default: Date.now,
+        trim: true
     },
     salary: {
         type: Number,
-        required: true
+        required: true,
+        trim: true
     },
     position: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     }
 });
 
-const Employee = mongoose.model("Employee", Schema);
+
+// employeeSchema.index({
+//     name: "text",
+//     description: "text"
+// });
+
+employeeSchema.index({
+    "name": "text"
+});
+
+
+const Employee = mongoose.model("Employee", employeeSchema);
 
 module.exports = Employee;
