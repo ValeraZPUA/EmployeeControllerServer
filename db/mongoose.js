@@ -12,9 +12,6 @@ mongoose.connect('mongodb://localhost/db_employeeController',  { useNewUrlParser
 
 });
 
-//enable debug
 mongoose.set('debug', true);
-
-//export db
 
 module.exports = mongoose;

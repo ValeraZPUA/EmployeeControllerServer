@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-
-const { ObjectId } = mongoose.Schema.Types;
+const moment = require('moment');
 
 const employeeSchema = new mongoose.Schema({
     fullName: {
@@ -19,10 +18,10 @@ const employeeSchema = new mongoose.Schema({
         trim: true
     },
     addDate: {
-        type: Date,
+        type: String,
         required: true,
-        default: Date.now,
-        trim: true
+        default: moment().format("MMM Do YY"),
+trim: true
     },
     salary: {
         type: Number,
