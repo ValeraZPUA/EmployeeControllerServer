@@ -59,3 +59,12 @@ module.exports.search = async (req, res, next) => {
         next (e);
     }
 };
+
+module.exports.deleteEmployee = async (req, res, next) => {
+    try {
+        await Employee.deleteOne({_id: req.params.id});
+        res.send("deleted");
+    } catch (e) {
+        next(e);
+    }
+};
